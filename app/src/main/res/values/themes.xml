@@ -1,0 +1,28 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.PsychologicalControl" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Primary brand color.
+        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@color/white</item>
+        &lt;!&ndash; Secondary brand color. &ndash;&gt;
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>-->
+        <!-- Status bar color. -->
+        <!--<item name="android:statusBarColor">?attr/colorPrimaryVariant</item>-->
+        <!-- Customize your theme here. -->
+    </style>
+    <style name="nav_button_style" parent="@android:style/Widget.Button">
+        <item name="android:layout_height">@dimen/button_height</item>
+        <item name="android:textSize">@dimen/button_font_size</item>
+        <item name="android:background">@drawable/rounded_corner_button</item>
+        <item name="android:textColor">@color/text_button</item>
+        <item name="android:colorAccent">@color/background_button</item>
+        <!--<item name="android:layout_marginRight">10dp</item>
+        <item name="android:layout_marginLeft">10dp</item>-->
+        <!--<item name="android:layout_width">0dp</item>-->
+        <!--<item name="android:backgroundTint">@color/background_button</item>-->
+
+    </style>
+</resources>

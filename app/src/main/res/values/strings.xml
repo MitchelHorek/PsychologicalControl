@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">PsychologicalControl</string>
+    <string name="all">Все</string>
+    <string name="job">Работа</string>
+    <string name="favorite">Личное</string>
+    <string name="left_menu">Левое меню</string>
+    <string name="tasks_menu">Меню задач</string>
+    <string name="calendar_menu">Клендарь</string>
+    <string name="profile">Профиль</string>
+    <string name="plus">+</string>
+</resources>

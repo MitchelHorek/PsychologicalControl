@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="button_height">32dp</dimen>
+    <dimen name="menu_height">35dp</dimen>
+    <dimen name="button_font_size">15sp</dimen>
+    <dimen name="plus_size">68dp</dimen>
+    <dimen name="plus_padding">23dp</dimen>
+    <dimen name="plus_font_size">23sp</dimen>
+    <dimen name="three_point_width">26dp</dimen>
+    <dimen name="three_point_height">36dp</dimen>
+</resources>
