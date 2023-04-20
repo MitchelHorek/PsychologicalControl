@@ -8,4 +8,11 @@
     <string name="calendar_menu">Клендарь</string>
     <string name="profile">Профиль</string>
     <string name="plus">+</string>
+    <string name="hint_text">Введите здесь новую задачу</string>
+    <string name="save">Сохранить</string>
+    <string name="cancel">Отмена</string>
+    <string name="login">Логин</string>
+    <string name="registration">Регистрация</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
 </resources>

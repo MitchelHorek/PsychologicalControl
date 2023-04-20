@@ -6,87 +6,77 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/menuConstraintLayout"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/menu_height"
-        android:layout_marginEnd="@dimen/three_point_width"
+        android:id="@+id/constraintLayout"
+        android:layout_width="0dp"
+        android:layout_height="429dp"
+        android:background="@drawable/vector__1_"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <Button
-            android:id="@+id/button3"
-            style="@style/nav_button_style"
-            android:layout_width="0dp"
-            android:layout_marginStart="10dp"
-            android:layout_weight="1"
-            android:onClick="showAllTask"
-            android:text="@string/all"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:text="@string/login"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+            <!--tools:layout_editor_absoluteX="176dp"-->
+
+
+        <EditText
+            android:id="@+id/editTextEmailLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            android:hint="@string/email"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            tools:layout_editor_absoluteX="100dp" />
+
+        <EditText
+            android:id="@+id/editTextPasswordLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:hint="@string/password"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextEmailLogin"
+            tools:layout_editor_absoluteX="100dp" />
 
         <Button
-            android:id="@+id/button"
-            style="@style/nav_button_style"
+            android:id="@+id/button6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:onClick="login"
+            android:text="@string/login"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextPasswordLogin" />
 
-            android:layout_width="0dp"
-            android:layout_marginStart="20dp"
-            android:layout_weight="1"
-            android:text="@string/favorite"
-            app:layout_constraintStart_toEndOf="@+id/button2"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/button2"
-            style="@style/nav_button_style"
-
-            android:layout_width="0dp"
-            android:layout_marginStart="20dp"
-            android:layout_weight="1"
-            android:text="@string/job"
-            app:layout_constraintStart_toEndOf="@+id/button3"
-            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/menuConstraintLayout" />
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_nav"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_gravity="start"
-        app:itemBackground="@color/white"
-        app:itemIconTint="@drawable/button_nav_colors"
-        app:labelVisibilityMode="unlabeled"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/my_botton_menu" />
-
     <Button
-        android:id="@+id/button4"
-        style="@style/nav_button_style"
-        android:layout_width="@dimen/plus_size"
-        android:layout_height="@dimen/plus_size"
-        android:layout_marginEnd="@dimen/plus_padding"
-        android:layout_marginBottom="@dimen/plus_padding"
-        android:text="@string/plus"
-        android:textSize="@dimen/plus_font_size"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_nav"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:id="@+id/button7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
 
-    <Button
-        android:id="@+id/button5"
-        android:layout_width="@dimen/three_point_width"
-        android:layout_height="@dimen/three_point_height"
-        android:text="Button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        android:layout_marginBottom="10dp"
+        android:text="@string/registration"
+        android:textAlignment="center"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

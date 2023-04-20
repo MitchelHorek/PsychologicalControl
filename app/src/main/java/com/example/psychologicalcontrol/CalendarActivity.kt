@@ -12,7 +12,7 @@ class CalendarActivity : AppCompatActivity() {
         setContentView(R.layout.activity_calendar)
         val bottomNavView: BottomNavigationView = findViewById(R.id.bottom_nav_calendar)
         val helper:Helper = Helper()
-        helper.defineBottomNav(this,bottomNavView,R.id.calendar_menu)
+        helper.defineBottomNav(this, this, bottomNavView, R.id.calendar_menu)
         val calendar: CalendarView = findViewById(R.id.calendarView)
         calendar.date = Date().time
     }

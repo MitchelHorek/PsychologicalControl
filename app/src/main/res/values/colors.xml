@@ -11,4 +11,5 @@
     <color name="background_button">#C5CFEE</color>
     <color name="text_button">#5D5DA1</color>
     <color name="active_menu">#0088F0</color>
+    <color name="background_edit">#DCDCDC</color>
 </resources>
