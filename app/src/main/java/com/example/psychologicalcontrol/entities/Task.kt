@@ -6,7 +6,7 @@ import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
 @Entity(
-
+    tableName = "task",
     foreignKeys = [ForeignKey(
         entity = User::class,
         childColumns = ["id_user"],

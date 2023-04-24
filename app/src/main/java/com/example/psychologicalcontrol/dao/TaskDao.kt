@@ -1,8 +1,6 @@
 package com.example.psychologicalcontrol.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import com.example.psychologicalcontrol.entities.Task
 import com.example.psychologicalcontrol.entities.User
 
@@ -15,7 +13,11 @@ interface TaskDao {
     @Query("SELECT * FROM task WHERE id_user = :idUser AND date = :date")
     fun getAllByDate(idUser: Int, date: String)
     @Insert
-    fun insertUser(vararg user: User)
-    //todo
+    fun insertTask(vararg task: Task)
+    @Delete
+    fun deleteTask(task: Task)
+    @Update
+    fun updateTask(task: Task)
+
 
 }

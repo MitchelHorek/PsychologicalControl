@@ -3,8 +3,11 @@ package com.example.psychologicalcontrol
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
+import android.widget.EditText
+import androidx.room.Room
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -15,15 +18,33 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        auth = Firebase.auth
+        createDatabase();
+        /*auth = Firebase.auth*/
     }
+
+    private fun createDatabase() {
+        print("test")
+        Log.d("mainactivity", "test")
+        val db = Room.databaseBuilder(
+            applicationContext,
+            AppDatabase::class.java, "psychological_control"
+        ).build()
+        Log.d("mainactivity", "test2")
+        val category = db.categoryDao().getCategory(1)
+        Log.d("mainactivity", String.format("%d", category.id))
+        print(category.id)
+        if(db.categoryDao().getCategory(1) == null){
+
+        }
+    }
+
     public override fun onStart() {
         super.onStart()
         // Check if user is signed in (non-null) and update UI accordingly.
-        val currentUser = auth.currentUser
+        /*val currentUser = auth.currentUser
         if(currentUser != null){
             reload()
-        }
+        }*/
     }
 
     private fun reload() {
@@ -34,19 +55,17 @@ class MainActivity : AppCompatActivity() {
 
     fun login(view: View){
         //to do оработать авторизацию
-        auth.signInWithEmailAndPassword(email, password)
+        val editTextEmailLogin:EditText = findViewById(R.id.editTextEmailLogin)
+        val editTextPasswordLogin:EditText = findViewById(R.id.editTextPasswordLogin)
+
+        auth.signInWithEmailAndPassword(editTextEmailLogin.text.toString(), editTextPasswordLogin.text.toString())
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    Log.d(TAG, "signInWithEmail:success")
+
                     val user = auth.currentUser
-                    updateUI(user)
+                    /*updateUI(user)*/
                 } else {
-                    // If sign in fails, display a message to the user.
-                    Log.w(TAG, "signInWithEmail:failure", task.exception)
-                    Toast.makeText(baseContext, "Authentication failed.",
-                        Toast.LENGTH_SHORT).show()
-                    updateUI(null)
+                    /*updateUI(null)*/
                 }
             }
 

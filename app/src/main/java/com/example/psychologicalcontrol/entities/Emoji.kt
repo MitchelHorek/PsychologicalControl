@@ -3,6 +3,7 @@ package com.example.psychologicalcontrol.entities
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
+import androidx.room.PrimaryKey
 
 @Entity (tableName = "emoji",
     foreignKeys = [
@@ -13,8 +14,9 @@ import androidx.room.ForeignKey
     )]
 )
 data class Emoji (
-    @ColumnInfo(name = "id") val id: Int,
+    @PrimaryKey(autoGenerate = true) val id: Int,
     @ColumnInfo(name = "id_user") val idUser: Int,
     @ColumnInfo(name = "date") val date: String,
     @ColumnInfo(name = "value") val value: Int,
+
 )

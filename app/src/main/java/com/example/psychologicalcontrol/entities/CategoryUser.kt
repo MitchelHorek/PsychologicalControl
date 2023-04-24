@@ -6,6 +6,7 @@ import androidx.room.ForeignKey
 
 
 @Entity (tableName = "category_user",
+    primaryKeys = ["id_user", "id_category"],
     foreignKeys = [ForeignKey(
         entity = User::class,
         childColumns = ["id_user"],
