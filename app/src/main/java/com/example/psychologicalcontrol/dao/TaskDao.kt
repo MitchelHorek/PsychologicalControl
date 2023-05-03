@@ -7,17 +7,17 @@ import com.example.psychologicalcontrol.entities.User
 @Dao
 interface TaskDao {
     @Query("SELECT * FROM task WHERE id_user = :idUser")
-    fun getAll(idUser:Int): List <Task>
+    suspend fun getAll(idUser:Int): List <Task>
     @Query("SELECT * FROM task WHERE id_user = :idUser AND id_category = :idCategory")
-    fun getAllByCategory(idUser: Int, idCategory:Int)
+    suspend fun getAllByCategory(idUser: Int, idCategory:Int): List <Task>
     @Query("SELECT * FROM task WHERE id_user = :idUser AND date = :date")
-    fun getAllByDate(idUser: Int, date: String)
+    suspend fun getAllByDate(idUser: Int, date: String): List <Task>
     @Insert
-    fun insertTask(vararg task: Task)
+    suspend fun insertTask(vararg task: Task)
     @Delete
-    fun deleteTask(task: Task)
+    suspend fun deleteTask(task: Task)
     @Update
-    fun updateTask(task: Task)
+    suspend fun updateTask(task: Task)
 
 
 }

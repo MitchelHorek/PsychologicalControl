@@ -8,7 +8,7 @@ import com.example.psychologicalcontrol.entities.Emoji
 @Dao
 interface EmojiDao {
     @Query ("SELECT * FROM emoji WHERE id_user = :idUser AND date = :date")
-    fun getEmojiByDate (idUser: Int, date: String)
+    suspend fun getEmojiByDate (idUser: Int, date: String): Emoji
     @Insert
-    fun insertEmoji (emoji: Emoji)
+    suspend fun insertEmoji (emoji: Emoji)
 }

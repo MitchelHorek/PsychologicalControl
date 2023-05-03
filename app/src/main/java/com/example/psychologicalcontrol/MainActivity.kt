@@ -7,35 +7,71 @@ import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.EditText
+import androidx.lifecycle.lifecycleScope
 import androidx.room.Room
+import androidx.room.RoomDatabase
+import com.example.psychologicalcontrol.entities.Category
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
+    private lateinit var db:AppDatabase
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        createDatabase();
-        /*auth = Firebase.auth*/
+        try {
+            createDatabase();
+            /*auth = Firebase.auth*/
+        }
+        catch (e: java.lang.Exception){
+            print(e)
+        }
+
     }
 
     private fun createDatabase() {
         print("test")
         Log.d("mainactivity", "test")
-        val db = Room.databaseBuilder(
+        db = Room.databaseBuilder(
             applicationContext,
             AppDatabase::class.java, "psychological_control"
         ).build()
         Log.d("mainactivity", "test2")
-        val category = db.categoryDao().getCategory(1)
+        createBaseCategories()
+        /*val category = db.categoryDao().getCategory(1)
         Log.d("mainactivity", String.format("%d", category.id))
         print(category.id)
         if(db.categoryDao().getCategory(1) == null){
 
+        }*/
+    }
+    private fun createBaseCategories() {
+        lifecycleScope.launch {
+            val category = db.categoryDao().getCategory(1)
+            if (category == null){
+                insertNewCategory("лекрства")
+            }
+            val category2 = db.categoryDao().getCategory(2)
+            if (category2 == null){
+                insertNewCategory("обследование")
+            }
+            /*insertUserToCategory(1, 1)
+            insertUserToCategory(1, 2)*/
+
+
+
         }
+    }
+    public fun insertNewCategory(name: String){
+        lifecycleScope.launch {
+            val category = Category(0, name)
+            db.categoryDao().insertCategory(category)
+        }
+
     }
 
     public override fun onStart() {

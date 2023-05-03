@@ -8,8 +8,8 @@ import com.example.psychologicalcontrol.entities.User
 @Dao
 interface UserDao {
     @Query("SELECT * FROM user WHERE id = :userId")
-    fun getUserById(userId: Int): User
+    suspend fun getUserById(userId: Int): User
     @Insert
-    fun insertUser(vararg user: User)
+    suspend fun insertUser(vararg user: User)
 
 }
