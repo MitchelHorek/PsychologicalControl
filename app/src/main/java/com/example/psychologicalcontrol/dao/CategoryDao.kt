@@ -9,7 +9,7 @@ import com.example.psychologicalcontrol.entities.Task
 @Dao
 interface CategoryDao {
     @Query("SELECT * FROM category WHERE id = :id")
-    suspend fun getCategory(id:Int): Category
+    suspend fun getCategory(id:Int): Category?
     @Insert
     suspend fun insertCategory(category: Category)
 

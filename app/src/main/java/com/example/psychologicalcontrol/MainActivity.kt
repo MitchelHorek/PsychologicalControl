@@ -19,12 +19,12 @@ import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
-    private lateinit var db:AppDatabase
+    private var db:DatabaseHelper? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         try {
-            createDatabase();
+            db = DatabaseHelper.getInstance(this, lifecycleScope)
             /*auth = Firebase.auth*/
         }
         catch (e: java.lang.Exception){
@@ -33,46 +33,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun createDatabase() {
-        print("test")
-        Log.d("mainactivity", "test")
-        db = Room.databaseBuilder(
-            applicationContext,
-            AppDatabase::class.java, "psychological_control"
-        ).build()
-        Log.d("mainactivity", "test2")
-        createBaseCategories()
-        /*val category = db.categoryDao().getCategory(1)
-        Log.d("mainactivity", String.format("%d", category.id))
-        print(category.id)
-        if(db.categoryDao().getCategory(1) == null){
 
-        }*/
-    }
-    private fun createBaseCategories() {
-        lifecycleScope.launch {
-            val category = db.categoryDao().getCategory(1)
-            if (category == null){
-                insertNewCategory("лекрства")
-            }
-            val category2 = db.categoryDao().getCategory(2)
-            if (category2 == null){
-                insertNewCategory("обследование")
-            }
-            /*insertUserToCategory(1, 1)
-            insertUserToCategory(1, 2)*/
-
-
-
-        }
-    }
-    public fun insertNewCategory(name: String){
-        lifecycleScope.launch {
-            val category = Category(0, name)
-            db.categoryDao().insertCategory(category)
-        }
-
-    }
 
     public override fun onStart() {
         super.onStart()
@@ -94,17 +55,39 @@ class MainActivity : AppCompatActivity() {
         val editTextEmailLogin:EditText = findViewById(R.id.editTextEmailLogin)
         val editTextPasswordLogin:EditText = findViewById(R.id.editTextPasswordLogin)
 
-        auth.signInWithEmailAndPassword(editTextEmailLogin.text.toString(), editTextPasswordLogin.text.toString())
+        /*auth.signInWithEmailAndPassword(editTextEmailLogin.text.toString(), editTextPasswordLogin.text.toString())
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
 
                     val user = auth.currentUser
-                    /*updateUI(user)*/
+                    *//*updateUI(user)*//*
                 } else {
-                    /*updateUI(null)*/
+                    *//*updateUI(null)*//*
                 }
-            }
+            }*/
+        val email = editTextEmailLogin.text.toString()
+        val password = editTextPasswordLogin.text.toString()
+        if (email.equals("") || password.equals("")){
+            Helper().showToast("Все поля должна быть заполнены", this)
+            return
+        }
+        val helper = Helper()
+        val passwordSHA = helper.sha256(password)
+        val db = DatabaseHelper.getInstance(this,lifecycleScope)
+        if (db?.checkUser(email, passwordSHA) == true){
+            val taskActivity: Intent = Intent(this,TaskActivity::class.java)
+            this.startActivity(taskActivity)
+            overridePendingTransition(androidx.appcompat.R.anim.abc_fade_in, androidx.appcompat.R.anim.abc_fade_out)
+        }
+        else {
+            helper.showToast("Неверные данные", this)
+        }
 
+    }
+    fun goToRegistration(view: View){
+        val registrationActivity: Intent = Intent(this,RegistrationActivity::class.java)
+        startActivity(registrationActivity)
+        overridePendingTransition(androidx.appcompat.R.anim.abc_fade_in, androidx.appcompat.R.anim.abc_fade_out)
     }
 }
 //todo добавить плавный переход активити календарь +++
