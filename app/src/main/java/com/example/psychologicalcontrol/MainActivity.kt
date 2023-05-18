@@ -1,5 +1,6 @@
 package com.example.psychologicalcontrol
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -74,7 +75,13 @@ class MainActivity : AppCompatActivity() {
         val helper = Helper()
         val passwordSHA = helper.sha256(password)
         val db = DatabaseHelper.getInstance(this,lifecycleScope)
-        if (db?.checkUser(email, passwordSHA) == true){
+        val idUser = db?.checkUser(email, passwordSHA)!!
+        if (idUser > 0 ){
+            val sharedPreference =  getSharedPreferences("PREFERENCE_USER", Context.MODE_PRIVATE)
+            var editor = sharedPreference.edit()
+            editor.putInt("id_user",idUser)
+            editor.apply()
+
             val taskActivity: Intent = Intent(this,TaskActivity::class.java)
             this.startActivity(taskActivity)
             overridePendingTransition(androidx.appcompat.R.anim.abc_fade_in, androidx.appcompat.R.anim.abc_fade_out)

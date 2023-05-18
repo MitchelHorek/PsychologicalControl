@@ -6,8 +6,11 @@ import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.lifecycle.lifecycleScope
 import androidx.room.Room
 import com.example.psychologicalcontrol.entities.Category
+import com.example.psychologicalcontrol.entities.CategoryUser
 import com.example.psychologicalcontrol.entities.User
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class DatabaseHelper private constructor(context: Context, lifecycleScope: LifecycleCoroutineScope){
     private lateinit var db: AppDatabase
@@ -90,11 +93,51 @@ class DatabaseHelper private constructor(context: Context, lifecycleScope: Lifec
 
     }
 
-    fun checkUser(login: String, password: String): Boolean{
-        var idUser = 0
-        lifecycleScope.launch{
-            idUser = instance!!.db.userDao().getUserByLoginPassword(login, password)!!
+    fun checkUser(login: String, password: String): Int{
+
+        var idUser: Int = 0
+        val userDao = instance!!.db.userDao()
+        try {
+            idUser = runBlocking(Dispatchers.IO){
+                userDao.getUserByLoginPassword(login, password)
+            }
         }
-        return idUser != 0
+        catch(e:Exception){
+            idUser = 0
+        }
+        if(idUser != 0){
+            insertCategoryUser(idUser,1)
+            insertCategoryUser(idUser,2)
+        }
+        return idUser
+    }
+    fun insertCategoryUser(idUser:Int, idCategory:Int){
+        val categoryUserDao = instance!!.db.categoryUserDao()
+        val categories: List<Int>  = runBlocking(Dispatchers.IO){
+            categoryUserDao.getCategoriesByUser(idUser)
+        }
+        if(!categories.contains(1)){
+            runBlocking(Dispatchers.IO){
+                categoryUserDao.insertCategoryUser(CategoryUser(idUser,1))
+            }
+        }
+
+    }
+    fun selectCategoriesByUser(idUser:Int): List<Category>{
+        val categoryUserDao = instance!!.db.categoryUserDao()
+        val categoryDao = instance!!.db.categoryDao()
+        var categoryList = ArrayList<Category>()
+        val categories: List<Int> = runBlocking(Dispatchers.IO){
+            categoryUserDao.getCategoriesByUser(idUser)
+        }
+        for(category in categories){
+            val currentCategory = runBlocking(Dispatchers.IO){
+                categoryDao.getCategory(category)
+            }
+            if (currentCategory != null) {
+                categoryList.add(currentCategory)
+            }
+        }
+        return  categoryList
     }
 }
